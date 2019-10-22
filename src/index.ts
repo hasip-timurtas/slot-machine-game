@@ -21,9 +21,7 @@ export class App
     private createrenderer(): void 
     {   
         this.divContainer = document.getElementById("container");
-
         this.game = new PIXI.Application({ transparent: true });
-
         this.loadImages()
         this.divContainer.appendChild(this.game.view);
         window.onresize = this.resize;
@@ -33,15 +31,13 @@ export class App
 
     private loadImages = () =>{
         const imangeNames: string[] = ["A", "J", "K", "P", "Q", "T"];
-
-        imangeNames.forEach(img=>{
+        imangeNames.forEach((img: string)=>{
             this.game.loader.add(`assets/${img}.png`)
         })
 
         this.game.loader.load(()=>{
             this.showSlot()
         })
-        
     }
 
 
@@ -52,9 +48,9 @@ export class App
     }
 
     private resize = () =>{
-        const ratio = Math.min(window.innerWidth / this.defaultWidth , window.innerHeight / this.defaultHeight);
-        const newWidth = Math.ceil(this.defaultWidth * ratio);
-        const newHeight = Math.ceil(this.defaultHeight * ratio);
+        const ratio: number = Math.min(window.innerWidth / this.defaultWidth , window.innerHeight / this.defaultHeight);
+        const newWidth: number = Math.ceil(this.defaultWidth * ratio);
+        const newHeight: number = Math.ceil(this.defaultHeight * ratio);
         this.game.renderer.resize(newWidth, newHeight);
         this.divContainer.style.width = `${newWidth}px`;
         this.divContainer.style.height = `${newHeight}px`;
