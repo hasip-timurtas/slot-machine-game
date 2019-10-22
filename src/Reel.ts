@@ -54,30 +54,30 @@ export class Reel {
     }
 
     private arrangeCards(spinnedDegree: number): void {
-        const unitsNumber: number = this.cards.length;
-        const radianShare: number = (360 * (Math.PI / 180)) / unitsNumber;
+        const cardsNumber: number = this.cards.length;
+        const radianShare: number = (360 * (Math.PI / 180)) / cardsNumber;
         const spinnedRad: number = spinnedDegree * (Math.PI / 180);
 
         // arrange each card position
-        this.cards.forEach((unit: PIXI.Sprite, index: number) => {
+        this.cards.forEach((card: PIXI.Sprite, index: number) => {
             const rad: number = radianShare * index + spinnedRad;
             const positionX: number = this.reelCenter.x + this.reelRadius * Math.sin(rad);
             const positionY: number = this.reelCenter.y + this.reelRadius * Math.cos(rad);
-            unit.position.set(0, positionY);
-            unit.visible = (positionX >= 0);
+            card.position.set(0, positionY);
+            card.visible = (positionX >= 0);
         });
     }
 
     private changeFront(): void {
-        const degPerUnits: number[] = [90, -30, -150];
-        this.arrangeCards(degPerUnits[this.val]);
+        const degPerCards: number[] = [90, -30, -150];
+        this.arrangeCards(degPerCards[this.val]);
     }
 
     private changeFrontWithSpin(): void {
-        const degPerUnits: number[] = [90, -30, -150];
+        const degPerCards: number[] = [90, -30, -150];
         const defaultSpinDeg: number = -10 * 360;
-        const targetSpinDeg: number = defaultSpinDeg + degPerUnits[this.val];
-        const startDeg: number = degPerUnits[this.oldVal];
+        const targetSpinDeg: number = defaultSpinDeg + degPerCards[this.val];
+        const startDeg: number = degPerCards[this.oldVal];
         const spinMotion: TWEEN.Tween = new TWEEN.Tween({theta: startDeg})
             .to({theta: targetSpinDeg}, 3000)
             .delay(this.reelIdx * 200)
