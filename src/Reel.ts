@@ -58,6 +58,7 @@ export class Reel {
         const radianShare: number = (360 * (Math.PI / 180)) / unitsNumber;
         const spinnedRad: number = spinnedDegree * (Math.PI / 180);
 
+        // arrange each card position
         this.cards.forEach((unit: PIXI.Sprite, index: number) => {
             const rad: number = radianShare * index + spinnedRad;
             const positionX: number = this.reelCenter.x + this.reelRadius * Math.sin(rad);
@@ -79,7 +80,6 @@ export class Reel {
         const startDeg: number = degPerUnits[this.oldVal];
         const spinMotion: TWEEN.Tween = new TWEEN.Tween({theta: startDeg})
             .to({theta: targetSpinDeg}, 3000)
-            .easing(TWEEN.Easing.Exponential.InOut)
             .delay(this.reelIdx * 200)
             .onUpdate((param: {theta: number}) => {
                 this.arrangeCards(param.theta);
