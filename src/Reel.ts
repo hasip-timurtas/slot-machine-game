@@ -8,7 +8,7 @@ export class Reel {
     private readonly reelTextures: string[] = ['A', 'J', 'K', 'Q', 'P','T'];
     private readonly units: PIXI.Sprite[] = [];
     private readonly scale: number = 0.5;
-    private readonly reelRadius: number = 225;
+    private readonly reelRadius: number = 190;
     private readonly reelCenter: PIXI.Point = new PIXI.Point(0, 0);
 
     constructor() {
@@ -44,6 +44,7 @@ export class Reel {
             const unit: PIXI.Sprite = new  PIXI.Sprite()
             unit.texture =  PIXI.Texture.from(`assets/${img}.png`);
             unit.pivot.set(unit.width * 0.5, unit.height * 0.5);
+            unit.height = 180
             this.units.push(unit);
             this.container.addChild(unit);
         });
@@ -56,8 +57,8 @@ export class Reel {
         const radianShare: number = (360 * (Math.PI / 180)) / unitsNumber;
         const spinnedRad: number = spinnedDegree * (Math.PI / 180);
 
-        this.units.forEach((unit: PIXI.Sprite, idx: number) => {
-            const rad: number = radianShare * idx + spinnedRad;
+        this.units.forEach((unit: PIXI.Sprite, index: number) => {
+            const rad: number = radianShare * index + spinnedRad;
             const positionX: number = this.reelCenter.x + this.reelRadius * Math.sin(rad);
             const positionY: number = this.reelCenter.y + this.reelRadius * Math.cos(rad);
             unit.position.set(0, positionY);
